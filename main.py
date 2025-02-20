@@ -5,7 +5,7 @@ from pymongo import MongoClient
 from bson import ObjectId
 from datetime import timedelta 
 from config.credientials import users_collection,templates_collection,KEY
-
+import os
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -176,8 +176,11 @@ def delete_template(template_id):
 
     return jsonify({"message": "Template deleted successfully"}), 200
 
-    
+
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
+
     
 
